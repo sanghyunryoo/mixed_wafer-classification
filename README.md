@@ -18,9 +18,6 @@ This repo provides a small framework to:
 ### 2) Visualization Example
 ![Visualization Example](assets/viz_example.png)
 
-**Expected filenames**
-- `assets/gui_main.png`
-- `assets/viz_example.png`
 
 ---
 
@@ -56,11 +53,6 @@ conda activate wf_cls
 pip install -r requirements.txt
 ```
 
-### 2) (Optional) LeViT pretrained weights
-If you want LeViT to load pretrained weights automatically, place the file here:
-```text
-weight/pretrained/levit384_imagenet.h5
-```
 
 ---
 
@@ -91,138 +83,6 @@ The GUI runs scripts located in `code/`.
 
 ---
 
-## Run from CLI (Direct Execution)
-
-> Run commands from the **project root** (`wf_cls/`) so relative paths resolve correctly.
-
-### 1) Train CVAE (`code/train_cvae.py`)
-Default output (weights-only):
-```text
-weight/cvae/{difficulty}/best.h5
-```
-
-Example:
-```bash
-python code/train_cvae.py \
-  --difficulty data_hard \
-  --epochs 300 \
-  --batch 16 \
-  --seed 1
-```
-
----
-
-### 2) Visualize (`code/visualize_data.py`)
-Shows **3 rows**: `Original / Radon / Generated`
-
-CVAE weights path resolution:
-- If `--cvae_path` is provided → use it
-- Else → `weight/cvae/{difficulty}/best.h5`
-
-Example:
-```bash
-python code/visualize_data.py \
-  --difficulty data_hard \
-  --task mixed \
-  --split test \
-  --data_type radon \
-  --orig_data_type orig \
-  --seed 0 \
-  --show
-```
-
-Save to PNG (optional):
-```bash
-python code/visualize_data.py \
-  --difficulty data_hard \
-  --task mixed \
-  --split test \
-  --save_path assets/viz_example.png
-```
-
----
-
-### 3) Train/Eval teacher candidates (base 1-channel) (`code/teacher_selection.py`)
-Weights output:
-```text
-weight/{model}/{task}/{data_type}/best_{seed}.weights.h5
-```
-
-Example:
-```bash
-python code/teacher_selection.py \
-  --mode train \
-  --difficulty data_extreme \
-  --task mixed \
-  --data_type radon \
-  --model levit \
-  --seed 1
-```
-
----
-
-### 4) Train/Eval hybrid teacher (2-channel) (`code/train_teacher.py`)
-Hybrid input is built as:
-```text
-hybrid_x = concat([original(1ch), denoised(1ch)], axis=-1)  # => 2ch
-```
-
-Teacher weights output (default):
-```text
-weight/{model}/{task}/{data_type}/best_{seed}_hybrid.h5
-```
-
-Example:
-```bash
-python code/train_teacher.py \
-  --mode train \
-  --difficulty data_extreme \
-  --task mixed \
-  --data_type radon \
-  --model fastervit \
-  --seed 1
-```
-
----
-
-### 5) Distillation (teacher → student) (`code/distillation.py`)
-**Teacher file naming rule (important):**
-- There is **no teacher_suffix**
-- The **teacher seed** is used as the suffix
-
-Default teacher path (auto):
-```text
-weight/{teacher_model}/{task}/{data_type}/best_{teacher_seed}_hybrid.h5
-```
-
-Student output:
-```text
-weight/{model}/{task}/{data_type}/best_{seed}_distill.h5
-```
-
-Example:
-```bash
-python code/distillation.py \
-  --mode train \
-  --difficulty data_extreme \
-  --task mixed \
-  --data_type radon \
-  --teacher_model fastervit \
-  --teacher_seed 1 \
-  --model levit \
-  --seed 1
-```
-
-Override teacher path manually:
-```bash
-python code/distillation.py \
-  --difficulty data_extreme \
-  --task mixed \
-  --data_type radon \
-  --teacher_path weight/fastervit/mixed/radon/best_1_hybrid.h5 \
-  --model levit \
-  --seed 1
-```
 
 ---
 
@@ -263,10 +123,3 @@ Either:
 - pass `--cvae_path /full/or/relative/path/to/best.h5`
 
 ---
-
-## How to attach your screenshots
-1) Create a folder: `assets/`
-2) Save:
-   - GUI screenshot → `assets/gui_main.png`
-   - Visualization screenshot → `assets/viz_example.png`
-3) Commit both images along with this README.
