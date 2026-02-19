@@ -1,16 +1,13 @@
-# WBM Framework (CVAE + Hybrid Teacher + Distillation)
+# WBM Framework (Convolutional-VAE + Hybrid Teacher + Distillation)
 
 This repo provides a small framework to:
-- train a **Conv-VAE (CVAE)** for denoising,
+- train a **Conv-VAE** for denoising,
 - train a **hybrid teacher** using **[original, denoised]** concatenated inputs (2-channel),
 - train a **student** via **knowledge distillation** from the teacher,
 - and **visualize** *Original / Radon / Generated* samples.
 
 ---
 
-## Screenshots
-
-> Put the two images below into an `assets/` folder so they render in this README.
 
 ### 1) Main GUI
 ![Main GUI](assets/gui_main.png)
@@ -81,6 +78,14 @@ The GUI runs scripts located in `code/`.
 Saved to:
 ```text
 result/{task}/{data_type}/{model}/
+```
+
+---
+
+### We also provide docker image
+Can be downloaded:
+```text
+docker pull jaykor97/wf_cls
 ```
 
 ---
