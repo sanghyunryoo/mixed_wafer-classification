@@ -1,5 +1,5 @@
 # WBM Framework
-
+![Framework](assets/framework.png)
 This repo provides a small framework to:
 - train a **Conv-VAE** for denoising,
 - train a **hybrid teacher** using **[original, denoised]** concatenated inputs (2-channel),
