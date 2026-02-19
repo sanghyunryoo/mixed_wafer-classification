@@ -1,0 +1,20 @@
+# Core
+numpy==1.26.4
+scipy==1.13.1
+
+# TensorFlow stack
+tensorflow==2.8.0
+keras==2.8.0
+tensorflow-addons==0.19.0
+
+# Data / metrics / utils
+scikit-learn==1.6.1
+pandas==2.2.3
+tqdm==4.67.1
+
+# Image / visualization
+opencv-python==4.11.0.86
+scikit-image==0.24.0
+matplotlib==3.9.4
+pillow==11.2.1
+imageio==2.37.0
