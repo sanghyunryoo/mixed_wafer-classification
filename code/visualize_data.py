@@ -162,7 +162,7 @@ def main():
     ap.add_argument("--task", type=str, default="mixed")
     ap.add_argument("--split", type=str, default="test", choices=["train", "val", "test"])
     ap.add_argument("--data_type", type=str, default="radon", help="CVAE 입력으로 사용할 데이터 타입")
-    ap.add_argument("--orig_data_type", type=str, default="radon", help="원본 시각화용 데이터 타입")
+    ap.add_argument("--orig_data_type", type=str, default="orig", help="원본 시각화용 데이터 타입")
 
     # model (✅ difficulty 반영)
     ap.add_argument(

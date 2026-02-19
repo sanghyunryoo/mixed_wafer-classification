@@ -498,7 +498,7 @@ class LauncherApp(tk.Tk):
         task = tk.StringVar(value="mixed")
         split = tk.StringVar(value="test")
         data_type = tk.StringVar(value="radon")
-        orig_data_type = tk.StringVar(value="radon")
+        orig_data_type = tk.StringVar(value="orig")
 
         cvae_path = tk.StringVar(value="")  # optional override
 
