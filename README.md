@@ -27,15 +27,15 @@ This repo provides a small framework to:
 wf_cls/
 ├── launch.py                      # GUI launcher (project root)
 ├── code/
-│   ├── train_cvae.py              # CVAE training (difficulty-aware)
+│   ├── train_cvae.py              # CVAE training 
 │   ├── visualize_data.py          # Original/Radon/Generated visualization (difficulty-aware CVAE path)
-│   ├── teacher_selection.py       # Base (1ch) teacher candidate training/eval
-│   ├── train_teacher.py           # Hybrid (2ch) teacher training/eval (CVAE denoise + concat)
-│   └── distillation.py            # Teacher → Student distillation (seed-suffix teacher rule)
+│   ├── teacher_selection.py       # Base teacher candidate training/eval
+│   ├── train_teacher.py           # (CVAE denoise + concat) teacher training/eval
+│   └── distillation.py            # Teacher → Student distillation
 ├── data/
-│   └── {difficulty}/{task}/{data_type}/...    # .npy data
+│   └── {difficulty}/{task}/{data_type}/...   
 ├── weight/
-│   ├── cvae/{difficulty}/best.h5              # CVAE weights (weights-only file)
+│   ├── cvae/{difficulty}/best.h5              # CVAE weights 
 │   ├── pretrained/levit384_imagenet.h5        # LeViT pretrained (optional)
 │   └── {model}/{task}/{data_type}/...         # teacher/student weights
 └── result/
@@ -52,23 +52,6 @@ conda create -n wf_cls python=3.9 -y
 conda activate wf_cls
 pip install -r requirements.txt
 ```
-
-
----
-
-## Data Convention (Important)
-
-All scripts expect this naming scheme:
-
-```text
-data/{difficulty}/{task}/{data_type}/{task}_{split}_data.npy
-data/{difficulty}/{task}/label/{task}_{split}_label.npy
-```
-
-- `difficulty`: e.g. `data_easy`, `data_hard`, `data_extreme`
-- `task`: e.g. `mixed`, `multi`, `single`
-- `data_type`: e.g. `radon`, `orig`
-- `split`: `train`, `val`, `test`
 
 ---
 
@@ -99,27 +82,5 @@ Saved to:
 ```text
 result/{task}/{data_type}/{model}/
 ```
-
----
-
-## Troubleshooting
-
-### `ModuleNotFoundError: keras_cv_attention_models`
-Run from the project root:
-```bash
-python code/train_teacher.py ...
-```
-Or use the GUI (`python launch.py`).
-
-### `FileNotFoundError: pretrained/levit384_imagenet.h5`
-Place the file here:
-```text
-weight/pretrained/levit384_imagenet.h5
-```
-
-### CVAE weights path mismatch
-Either:
-- place weights at `weight/cvae/{difficulty}/best.h5`, or
-- pass `--cvae_path /full/or/relative/path/to/best.h5`
 
 ---
