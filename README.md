@@ -52,7 +52,7 @@ pip install -r requirements.txt
 
 ---
 
-## Run with the GUI (Recommended)
+## Run with the GUI
 
 From the project root:
 ```bash
@@ -60,8 +60,6 @@ python launch.py
 ```
 
 The GUI runs scripts located in `code/`.
-
----
 
 
 ---
