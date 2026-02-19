@@ -1,4 +1,4 @@
-# WBM Framework (Convolutional-VAE + Hybrid Teacher + Distillation)
+# WBM Framework
 
 This repo provides a small framework to:
 - train a **Conv-VAE** for denoising,
